@@ -1,0 +1,26 @@
+<html>
+<head></head>
+<body>
+    <script>
+        const name = prompt('Enter your name');
+        console.log('Hello', name);
+        const targetNumber = Math.round(Math.random() * 100);
+        const maxNumber = 10;
+        console.log('targetnumber is:', targetNumber)
+        for (let countNumber = 0; countNumber < maxNumber; countNumber++) {
+            const numberEntered = prompt('Enter the number');
+            if (numberEntered > targetNumber) {
+                console.log('OOPS !!! the number entered is greater than target')
+            }
+            else if (numberEntered < targetNumber) {
+                console.log('OOPS !!! the number entered is lesser than target')
+            }
+            else {
+                console.log('congrats you entered the correct number', name);
+                break;
+            }
+        }
+        console.log('i m out')
+    </script>
+</body>
+</html>
