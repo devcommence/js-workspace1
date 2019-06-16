@@ -1,0 +1,66 @@
+<html>
+
+<head>
+    <title>Count</title>
+</head>
+
+<body>
+    <h1 id="value"></h1>
+    <h1 id='value-2'></h1>
+    <button id="btn">+</button>
+    <br> </br>
+    <button id="btn-neg">-</button>
+    <br> </br>
+    <button id="btn-reset">R</button>
+    <script>
+        const valueHandler = document.getElementById('value')
+        const valueHandler2 = document.getElementById('value-2')
+
+        const btnHandler = document.getElementById('btn')
+
+        const btnDownHanler = document.getElementById('btn-neg')
+
+        const btnResetHandeler = document.getElementById('btn-reset')
+        const c1 = {
+            count: 0,
+            up: function () {
+                this.count += 1
+                return this.count
+            },
+            down: function () {
+                this.count -= 1
+                return this.count
+            },
+            reset: function () {
+                this.count = 0
+                return this.count
+            }
+        }
+        valueHandler.innerHTML = c1.count
+        btnHandler.addEventListener('click', function () {
+            c1.up()
+            valueHandler.innerHTML = c1.count
+            valueHandler2.innerHTML = c1.count*2
+        })
+
+        btnDownHanler.addEventListener('click', function () {
+            c1.down()
+            if (c1.count < 0) {
+                c1.reset()
+            }
+            valueHandler.innerHTML = c1.count
+            valueHandler2.innerHTML = c1.count*2
+        })
+
+        btnResetHandeler.addEventListener('click', function () {
+            c1.reset()
+            valueHandler.innerHTML = c1.count
+            valueHandler2.innerHTML = c1.count*2
+        })
+
+
+
+    </script>
+</body>
+
+</html>
