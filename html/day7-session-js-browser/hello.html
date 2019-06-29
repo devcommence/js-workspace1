@@ -1,0 +1,24 @@
+<!DOCUMENT html>
+<html>
+
+<head>
+    <title> Hello </title>
+</head>
+
+<body>
+    <div id="msg">
+
+    </div>
+    <script>
+        const msgHandler=document.getElementById('msg')
+        const h1Tag=document.createElement('h1')
+        const msg='Hello World'
+        // h1Tag.textContent=msg.toUpperCase()
+        h1Tag.innerHTML=msg.toUpperCase()
+        console.log(h1Tag)
+        console.dir(h1Tag)
+        msgHandler.appendChild(h1Tag)
+    </script>
+</body>
+
+</html>

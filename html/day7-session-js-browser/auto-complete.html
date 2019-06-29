@@ -1,0 +1,66 @@
+<!DOCUMENT html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="root">
+        <input type="text" placeholder="search..." id="search" />
+        <!-- <h2>List of Employees</h2>
+        <ul>
+            <li>Emp1</li>
+            <li>Emp2</li>
+            <li>Emp3</li>
+        </ul> -->
+    </div>
+    <script>
+        const employees = ['rajeev', 'shabeer', 'rohit', 'aditya', 'rashmi', 'supriya', 'hameed']
+
+        const rootHandle = document.getElementById('root')
+        const searchHandle = document.getElementById('search')
+        const ulTag = document.createElement('ul')
+        const h2Tag = document.createElement('h2')
+        rootHandle.appendChild(h2Tag)
+
+        function employeeList(employees) {
+         
+            h2Tag.innerHTML = `List of Employees - ${employees.length}`
+           
+            employees.sort().forEach(function(name) {
+                const liTag = document.createElement('li')
+                liTag.innerHTML = name.charAt(0).toUpperCase() + name.substr(1).toLowerCase()
+                ulTag.appendChild(liTag)
+            })
+
+        }
+        employeeList(employees)
+
+        rootHandle.appendChild(ulTag)
+
+
+        searchHandle.addEventListener('focus', function () {
+            console.log('focus')
+        })
+
+        searchHandle.addEventListener('blur', function () {
+            console.log('blur')
+            if (searchHandle.value == '') {
+                alert('cannot be blank')
+            }
+        })
+
+        searchHandle.addEventListener('keyup', function () {
+            console.log(searchHandle.value)
+            ulTag.innerHTML = ''
+            employeeList(employees.filter(employee =>
+                employee.includes(searchHandle.value)
+            )
+            )
+        })
+
+    </script>
+</body>
+
+</html>

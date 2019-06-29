@@ -1,0 +1,34 @@
+<!DOCUMENT html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="root">
+        <!-- <h2>List of Employees</h2>
+        <ul>
+            <li>Emp1</li>
+            <li>Emp2</li>
+            <li>Emp3</li>
+        </ul> -->
+    </div>
+    <script>
+        const rootHandle=document.getElementById('root')
+        const employees=['rajeev','shabeer','rohit','aditya','rashmi','supriya','hameed']
+        const h2Tag=document.createElement('h2')
+        h2Tag.innerHTML=`List of Employees - ${employees.length}`
+        rootHandle.appendChild(h2Tag)
+
+        const ulTag=document.createElement('ul')
+        employees.sort().forEach((name)=>{
+            const liTag=document.createElement('li')
+            liTag.innerHTML=name.charAt(0).toUpperCase()+name.substr(1).toLowerCase()
+            ulTag.appendChild(liTag)
+        })
+        rootHandle.appendChild(ulTag)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCUMENT html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="root">
+        <!-- <h2>List of Employees</h2>
+        <ul>
+            <li>1. ravi (1001)</li>
+            <li>2. suraj (1002)</li>
+            <li>1. divya (1003)</li>
+        </ul> -->
+    </div>
+    <script>
+        const rootHandle = document.getElementById('root')
+        const employees = [
+            { id: 1, name: 'ravi', empCode: '1001' },
+            { id: 2, name: 'suraj', empCode: '1002' },
+            { id: 3, name: 'divya', empCode: '1003' },
+        ]
+        const h2Tag = document.createElement('h2')
+        h2Tag.innerHTML = `List of Employees - ${employees.length}`
+        rootHandle.appendChild(h2Tag)
+
+        const ulTag = document.createElement('ul')
+        employees.sort().forEach((employee) => {
+            const liTag = document.createElement('li')
+            liTag.innerHTML = `${employee.id}. ${employee.name} (${employee.empCode})`
+            ulTag.appendChild(liTag)
+        })
+        rootHandle.appendChild(ulTag)
+    </script>
+</body>
+
+</html>

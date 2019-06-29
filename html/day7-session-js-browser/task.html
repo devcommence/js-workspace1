@@ -1,0 +1,39 @@
+<!DOCUMENT html>
+<html>
+
+<head>
+    <title> Task Manager </title>
+</head>
+
+<body>
+    <div id="root">
+        <ul id="list">
+            <!-- <li>Task1</li> -->
+        </ul>
+        <button id="btn-add">Add Task</button>
+    </div>
+    <script>
+        const rootHandler = document.getElementById('root')
+        const btnAddHandler = document.getElementById('btn-add')
+        const listHandler = document.getElementById('list')
+        btnAddHandler.addEventListener('click', function () {
+            const task = prompt('Enter task')
+            const liTag = document.createElement('li')
+            liTag.textContent = task
+            const button = document.createElement('button')
+            button.textContent = 'remove'
+
+            button.addEventListener('click', function () {
+                const confirm = window.confirm('Are you sure ?')
+                if (confirm) {
+                    listHandler.removeChild(liTag)
+                }
+            })
+
+            liTag.appendChild(button)
+            listHandler.appendChild(liTag)
+        })
+    </script>
+</body>
+
+</html>
