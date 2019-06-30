@@ -1,0 +1,52 @@
+<!DOCUMENT html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="root">
+        <h2 id='head'></h2>
+        <!-- <ul id="user"></ul> -->
+    </div>
+    <script>
+        const xhr = new XMLHttpRequest()
+        xhr.open('GET', 'https://jsonplaceholder.typicode.com/users')
+        xhr.send()
+        xhr.onload = function () {// this function gets called when data has been successfully 
+            // recieved from the server
+            //data comes back as JSON, which is string format
+            //data from the sever is inside the responseText property
+            //we use JSON.parse() to convert JSON data to JS object
+            //const data=xhr.responseText
+            // console.log(typeof data)
+            // console.log(data)
+            // console.log(JSON.parse(data))
+
+            const data = JSON.parse(xhr.responseText)
+            console.log(typeof data)
+            console.log(data)
+            console.log(data.length)
+            data.forEach(user => {
+                const liTag = document.createElement('li')
+                liTag.innerHTML = `${user.name} ${user.address.city}`
+                ulTag.appendChild(liTag)
+            })
+        }
+
+        xhr.onerror = function () {
+            console.log('Something went wrong', xhr.responseText)
+        }
+
+        const rootHandler = document.getElementById('root')
+        const ulTag = document.createElement('ul')
+        const h2Tag = document.createElement('h2')
+        h2Tag.innerHTML = `Name City`
+        ulTag.appendChild(h2Tag)
+        rootHandler.appendChild(ulTag)
+
+    </script>
+</body>
+
+</html>

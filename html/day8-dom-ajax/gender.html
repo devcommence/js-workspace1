@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Form</title>
+</head>
+
+<body>
+    <div id="root">
+        <h2>Enter Your Name</h2>
+        <form id="myForm" action="./users.html">
+            <label>Name
+                <input type="text" name="username" id="username" />
+            </label>
+            <input type="submit" />
+        </form>
+        <h2 id="output"></h2>
+    </div>
+    <script>
+        const formHandle = document.getElementById('myForm')
+        const nameHandle = document.getElementById('username')
+        const output = document.getElementById('output')
+
+        formHandle.addEventListener('submit', function (e) {
+
+            e.preventDefault()
+            const nameValue = nameHandle.value
+            const url = `sample`
+            if (nameValue == '') {
+                output.innerHTML = 'Please enter a name'
+            }
+            else {
+                const xhr = new XMLHttpRequest()
+                xhr.open('GET', url)
+                xhr.send()
+                xhr.onload = function () {
+                    const data = JSON.parse(xhr.responseText)
+                    const gender = data.gender
+                    output.innerHTML = `The gender is :${gender}`
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form</title>
+</head>
+<body>
+    <div id="root">
+        <form id="myForm" action="./users.html">
+            <label>username
+                <input type="text" name="username" id="username" />
+            </label>
+            <br/>
+            <label for="email">email</label>
+            <input type="text" name="email" id="email" />
+            <br/>
+            <label>
+                password
+                <input type="password" name="password" id="password" />
+            </label>
+            <br/>
+            <input type="submit" />
+        </form>
+        <input type="radio" name="toggle" value="Male" id="toggle">Male</input>
+        <input type="radio" name="toggle" value="Female" id="toggle"/>Female</input>
+    </div>
+    <script>
+        const formHandle = document.getElementById('myForm')
+        formHandle.addEventListener('submit', function (e) {
+            e.preventDefault()
+
+
+
+            console.log('form got submitted')
+        })
+    </script>
+</body>
+
+</html>
