@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root"></div>
+    <script>
+        const rootHandler = document.getElementById('root')
+        const h2TagHandler = document.createElement('h2')
+        const h3TagHandler1 = document.createElement('h3')
+        const h3TagHandler2 = document.createElement('h3')
+        const buttonHandler = document.createElement('button')
+        const h3TagHandler3 = document.createElement('h3')
+        buttonHandler.innerText = 'click'
+        rootHandler.appendChild(buttonHandler)
+        buttonHandler.addEventListener('click', function () {
+            navigator.geolocation.getCurrentPosition((position) => {
+                const latitude = position.coords.latitude
+                const longitude = position.coords.longitude
+                const apiKeyL = 'apikey'
+                const apiKeyMap = `apiKeyMap`
+                const url = `https://api.darksky.net/forecast/`
+                const mapApi = `https://apis.mapmyindia.com/advancedmaps/v1/${apiKeyMap}/still_image?center=${latitude},${longitude}&zoom=14&size=400x480&ssf=1&markers=${latitude},${longitude}`
+                h2TagHandler.innerText = `The current location is :`
+                h3TagHandler1.innerText = `Latitude is: ${latitude}`
+                h3TagHandler2.innerText = `Latitude is: ${longitude}`
+                rootHandler.appendChild(h3TagHandler1)
+                rootHandler.appendChild(h3TagHandler2)
+                const xhr = new XMLHttpRequest()
+                xhr.open('GET', `https://api.darksky.net/forecast/${apiKeyL}/${latitude},${longitude}`)
+                xhr.send()
+                xhr.onload = function () {
+                    const data = JSON.parse(xhr.responseText)
+                    const fTemp = data.currently.temperature
+                    const cTemp = Math.round((5 * (fTemp - 32)) / 9)
+                    h3TagHandler3.innerHTML = `The current temperature is ${cTemp}`
+                }
+                rootHandler.appendChild(h3TagHandler3)
+                const img = new Image()
+                img.src = mapApi
+                rootHandler.appendChild(img)
+            })
+        })
+    </script>
+
+</body>
+
+</html>

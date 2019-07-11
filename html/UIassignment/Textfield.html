@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Twitter Box</title>
+</head>
+
+<body>
+    <div id="root">
+        <h2 id="text-output">This is a text box</h2>
+        <textarea id="textbox" rows="10" cols="200"></textarea>
+    </div>
+
+    <script>
+        const rootHandle = document.getElementById('root')
+        const h2Tag = document.createElement('h2')
+        const sep=document.getElementById('separator')
+        const textHandler = document.getElementById('textbox')
+        textHandler.addEventListener('keypress', function (e) {
+            let textValue = e.target.value
+            const words=textValue.split(' ')
+            h2Tag.innerText=`The total number of words are ${words.length} and text are ${textValue.length}`
+            rootHandle.appendChild(h2Tag)
+        })
+    </script>
+
+</body>
+
+</html>
