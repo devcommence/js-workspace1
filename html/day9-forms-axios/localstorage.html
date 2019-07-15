@@ -1,0 +1,23 @@
+<!DOCUMENT html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+    <script>
+        const customer = {
+            name: 'gopi',
+            age: 21,
+            gender: 'm'
+        }
+        localStorage.setItem('customer', JSON.stringify(customer))
+        const parsedCustomer = JSON.parse(localStorage.getItem('customer'))
+        console.log(parsedCustomer)
+    </script>
+</body>
+
+</html>

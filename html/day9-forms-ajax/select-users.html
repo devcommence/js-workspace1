@@ -1,0 +1,56 @@
+<!DOCUMENT html>
+<html>
+
+<head>
+    <title> </title>
+</head>
+
+<body>
+    <div id="root">
+        <form>
+            <label>
+                Select User
+                <select id="users">
+                    <option value="">select</option>
+                </select>
+            </label>
+        </form>
+    </div>
+    <script>
+        //es6-feature-fetch
+        const usersHandle = document.querySelector('#users')
+        fetch(`https://jsonplaceholder.typicode.com/users`)
+            .then(function (response) {
+                return response.json()
+            })
+            .then(function (users) {
+                users.forEach(function (user) {
+                    const optionTag = document.createElement('option')
+                    optionTag.setAttribute('value', user.id)
+                    optionTag.innerHTML = user.name
+                    usersHandle.appendChild(optionTag)
+                })
+            })
+            .catch(function (err) {
+                console.log(err)
+            })
+
+        usersHandle.addEventListener('change', function () {
+            const id = usersHandle.value
+            if (id) {
+                fetch(`https://jsonplaceholder.typicode.com/users/${id}`)
+                    .then(function (response) {
+                        return response.json()
+                    })
+                    .then(function (user) {
+                        console.log(user)
+                    })
+                    .catch(function (err) {
+                        console.log(err)
+                    })
+            }
+        })
+    </script>
+</body>
+
+</html>
