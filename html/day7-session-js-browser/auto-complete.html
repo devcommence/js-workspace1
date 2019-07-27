@@ -25,10 +25,10 @@
         rootHandle.appendChild(h2Tag)
 
         function employeeList(employees) {
-         
+
             h2Tag.innerHTML = `List of Employees - ${employees.length}`
-           
-            employees.sort().forEach(function(name) {
+
+            employees.sort().forEach(function (name) {
                 const liTag = document.createElement('li')
                 liTag.innerHTML = name.charAt(0).toUpperCase() + name.substr(1).toLowerCase()
                 ulTag.appendChild(liTag)
