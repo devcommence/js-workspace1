@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+    <!-- https://unpkg.com/react@16.8.6/umd/ -->
+    <script src="./js/react.development.js"></script>
+
+    <!-- https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+
+    <!-- https://unpkg.com/babel-standalone@6.26.0/ -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+    const rootHandler=document.getElementById('root')
+
+     class MenuItem extends React.Component{
+         //we make use of constructor to maintain the state value 
+         constructor(){
+             //we must invoke the constructor in the aprnet class by using the super keyword
+             super()
+            //  we maintain any value that needs to track and changes, based on user interaction or an api call 
+            // inside the state,when the state value changes the component gets rendered 
+             this.state={
+                 quantity:0
+             }
+         }
+         //we use es6 arrow function,to ensure the this keyword refers to the current object
+         handleClick=()=>{
+             //we can update the state directly but the render method doesnot get called hence 
+            //  the ui value doesnot change
+            // console.log(this.props.name);
+            // this.state.quantity+=1
+            // console.log('click the  function',this.state)
+
+            //using the set statement,after updation of the value on the page,the render
+            // method gets called,hence we see the updated value on the page
+            this.setState((prevState)=>{
+                return {
+                    quantity:prevState.quantity+1
+                }
+            })
+         }
+         render(){
+             console.log('render',this.state)
+             return(
+                 <div>
+                 <h2>{this.props.name}</h2>
+                 <p>{this.props.cuisines.join(', ')}</p>
+                 <button> - </button>
+                 {this.state.quantity}
+                 {/* we make use of inline event handlers when we are refering to handle click function
+                 define inside the class
+                 */}
+                 <button onClick={this.handleClick}> + </button>
+                 <h2>Quantity - {this.state.quantity} </h2>
+                 </div>
+             )
+         }
+        }
+         const ele=(
+             <div>
+             <MenuItem name="masala Dosa" cuisines={["south indian","chinese"]}/>
+             <MenuItem name="veg biriyani" cuisines={["south indian","mughlai"]}/>
+             </div>
+         )
+
+    ReactDOM.render(ele,rootHandler)
+    </script>
+</body>
+
+</html>

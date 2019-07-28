@@ -37,7 +37,11 @@
         const ele=(
             <div>
             {socialLinks.map((sociallink)=>{
-                return <Link key={sociallink.id} name={sociallink.name} description={sociallink.description} url={sociallink.url}/>
+                return (<Link 
+                      key={sociallink.id} 
+                      name={sociallink.name} 
+                      description={sociallink.description} 
+                      url={sociallink.url}/>)
             })}
             </div>
         )
