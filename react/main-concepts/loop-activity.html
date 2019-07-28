@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+    <!-- https://unpkg.com/react@16.8.6/umd/ -->
+    <script src="./js/react.development.js"></script>
+
+    <!-- https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+
+    <!-- https://unpkg.com/babel-standalone@6.26.0/ -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+    const rootHandler=document.getElementById('root')
+    const links=[
+        {id:1,name:'google',website:'https://google.com'},
+        {id:2,name:'facebook',website:'https://facebook.com'},
+        {id:3,name:'skype',website:'https://skype.com'}
+    ]
+    const ele=(
+        <div>
+            <h2>Listing Links - {links.length} </h2>
+            <ul>
+           {links.map(function(link) {
+                    return <li key={link.id}>
+                        <a href={link.website}>
+                        {link.name}
+                        </a>
+                    </li>
+           })}
+           </ul>
+      </div>
+    )
+            ReactDOM.render(ele,rootHandler)
+    </script>
+</body>
+
+</html>

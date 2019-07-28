@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>React Elements</title>
+</head>
+<body>
+    <div id="root">
+    </div>
+    <!-- https://unpkg.com/react@16.8.6/umd/ -->
+    <script src="./js/react.development.js"></script>
+
+    <!-- https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+
+    <!-- https://unpkg.com/babel-standalone@6.26.0/ -->
+    <script src="./js/babel.js"></script>
+
+    <script type="text/babel">
+    const rootHandler=document.getElementById('root')
+    const msg='hello React'
+    function add(n1,n2) {
+        return n1+n2
+    }
+    const ele=<h1>{msg}{add(10,20)}</h1>
+    ReactDOM.render(ele,rootHandler)
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Function Component</title>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+    <!-- https://unpkg.com/react@16.8.6/umd/ -->
+    <script src="./js/react.development.js"></script>
+
+    <!-- https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+
+    <!-- https://unpkg.com/babel-standalone@6.26.0/ -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+    const rootHandler=document.getElementById('root')
+    const rooms=[
+        {id:1,title:'homestay 1',location:'coorg',price:'1500'},
+        {id:2,title:'homestay 2',location:'munnar',price:'500'},
+        {id:3,title:'homestay 3',location:'nanital',price:'1000'},
+        {id:4,title:'homestay 4',location:'darjeeling',price:'1200'},
+       
+    ]
+    function Room (props) {
+        return (
+            <div>
+            <h1>{props.title}</h1>
+            <h2>{props.price}</h2>
+            <p>{props.location}</p>
+            <hr/>
+            </div>
+        )
+    }
+    const ele=(
+        <div>
+        {rooms.map(function(room){
+            return<Room key={room.id} title={room.title} location={room.location} price={room.price}/>
+        })}
+        </div>
+      )
+       ReactDOM.render(ele,rootHandler)
+    </script>
+</body>
+
+</html>

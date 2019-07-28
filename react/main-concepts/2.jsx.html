@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>React Elements</title>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+    <!-- https://unpkg.com/react@16.8.6/umd/ -->
+    <script src="./js/react.development.js"></script>
+
+    <!-- https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+
+    <!-- https://unpkg.com/babel-standalone@6.26.0/ -->
+    <script src="./js/babel.js"></script>
+
+    <script type="text/babel">
+    const rootHandler=document.getElementById('root')
+    const ele=(
+        <div>
+            <h2>Listing Links</h2>
+            <ul>
+                <li><a href="https://www.google.com" target="_blank">visit google</a></li>
+                <li><a href="https://www.facebook.com" target="_blank">visit facebook</a></li>
+            </ul>
+       </div>
+    )
+    ReactDOM.render(ele,rootHandler)
+    </script>
+</body>
+
+</html>

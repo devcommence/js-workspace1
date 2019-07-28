@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Function Component</title>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+    <!-- https://unpkg.com/react@16.8.6/umd/ -->
+    <script src="./js/react.development.js"></script>
+
+    <!-- https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+
+    <!-- https://unpkg.com/babel-standalone@6.26.0/ -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+    const rootHandler=document.getElementById('root')
+    const socialLinks=[
+        {id:1,name:'Facebook',description:'social site',url:'https://www.facebook.com'},
+        {id:2,name:'Youtube',description:'social site',url:'https://www.youtube.com'},
+        {id:3,name:'Amazon',description:'e-commerce site',url:'https://www.amazon.com'},
+    ]
+
+    function Link(props){
+        return(
+            <div>
+            <h1>{props.name}</h1>
+            <p>{props.description}</p>
+            <h1><a href={props.url}>{props.name}</a></h1>
+            <hr/>
+            </div>
+        )}
+
+        const ele=(
+            <div>
+            {socialLinks.map((sociallink)=>{
+                return <Link key={sociallink.id} name={sociallink.name} description={sociallink.description} url={sociallink.url}/>
+            })}
+            </div>
+        )
+        ReactDOM.render(ele,rootHandler)
+       
+    </script>
+</body>
+
+</html>
