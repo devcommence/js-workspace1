@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+    <!-- https://unpkg.com/react@16.8.6/umd/ -->
+    <script src="./js/react.development.js"></script>
+
+    <!-- https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+
+    <!-- https://unpkg.com/babel-standalone@6.26.0/ -->
+    <script src="./js/babel.js"></script>
+    <script type="text/babel">
+    const rootHandler=document.getElementById('root')
+    class ReverseString extends React.Component{
+        constructor(props){
+            super()
+            this.state={
+                str:props.str
+            }
+        }
+        reverse=()=>{
+            this.setState((newString)=>{
+                return {
+                    str:newString.str.split('').reverse().join('')
+                }
+            })
+        }
+        render(){
+            console.log(this.state)
+            return(
+                <div>
+                <h2>{this.state.str}</h2>
+                <button onClick={this.reverse}>Click me</button>
+                </div>
+            )
+        }
+    }
+    const ele=(
+             <div>
+             <ReverseString str="hello world"/>
+             <ReverseString str="night world"/>
+             </div>
+         )
+    ReactDOM.render(ele,rootHandler)
+    </script>
+</body>
+
+</html>
