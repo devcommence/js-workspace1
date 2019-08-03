@@ -26,12 +26,9 @@
             }
         }
         reverse=()=>{
-            this.setState((newString)=>{
-                return {
-                    str:newString.str.split('').reverse().join('')
-                }
-            })
-        }
+            const newString=this.state.str
+            this.setState({str:newString.split('').reverse().join('')}) 
+            }
         render(){
             console.log(this.state)
             return(
