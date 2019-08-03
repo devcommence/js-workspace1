@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+    <!-- https://unpkg.com/react@16.8.6/umd/ -->
+    <script src="./js/react.development.js"></script>
+
+    <!-- https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+
+    <!-- https://unpkg.com/babel-standalone@6.26.0/ -->
+    <script src="./js/babel.js"></script>
+
+    <script type="text/babel">
+    const rootHandler=document.getElementById('root')
+    
+    class Customers extends React.Component{
+        constructor(){
+            console.log('constructor');
+            super()
+        this.state={
+            customers:[
+                {id:1,name:'sam'},
+                {id:2,name:'john'},
+                {id:3,name:'rachel'},
+                {id:4,name:'monica'},
+            ]
+        }  
+    }
+
+    handleRemove(id){
+        console.log(`handle remove`)
+        this.setState((prevState)=>{
+            return{
+                customers:prevState.customers.filter(customer =>customer.id!=id)
+            }
+        })
+    }
+    // listCustomer(){
+    //     const customer=[]
+    //     this.state.customers.forEach(customer=>{
+    //         customer.push(<li key={customer.id}>{customer.name}</li>)
+    //     })
+    // }
+       
+        render(){
+            return(
+                <div>
+                    <h2>Listing customers{this.state.customers.length}</h2>
+                    <ul>
+                        {/*this.listCustomer()*/}
+                        {this.state.customers.map(customer =>{
+                            return <li key={customer.id}>{customer.name}
+                                <button onClick={()=>{
+                                    console.log('event handler')
+                                    const confirmRemove=window.confirm('Are you sure?')
+                                    if(confirmRemove){
+                                        this.handleRemove(customer.id)
+                                    }
+                                }}>remove</button>
+                            </li>
+                        })}
+                    </ul>
+                </div>
+            )
+        }
+    } 
+            ReactDOM.render(<Customers/>,rootHandler)
+    </script>
+</body>
+
+</html>

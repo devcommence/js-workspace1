@@ -25,11 +25,11 @@
             super()
             this.handleClick3=this.handleClick3.bind(this)
             this.handleClick5=this.handleClick5.bind(this)
+            this.printThis=this.printThis.bind(this)
         }
         handleClick2(){
             console.log('click 2',this)
         }
-
         //this bound in the constructor
         handleClick3(){
             console.log('click3',this)
@@ -41,6 +41,11 @@
         handleClick5(num){
             console.log('click 5',num);
         }
+      //instance method if not treated as an event handler function this refers to the 
+    //   current object, if we refer it as an event method this will be undefined
+        printThis(){
+            console.log(this)
+        }
         render(){
             return(
                 <div>
@@ -50,9 +55,15 @@
                     <button onClick={this.handleClick2.bind(this)}>click 2</button>
                     <button onClick={this.handleClick3}>click 3</button>
                     <button onClick={this.handleClick4}>click 4</button>
+                   
                     <button onClick={()=>{
+                        console.log(2+2)
+                        this.printThis() //treating as a statement
                         this.handleClick5(Math.random()*100)
                     }}>click 5</button>
+                    
+                    <button onClick={this.printThis}>click print this</button>
+    
                     </div>
             )
         }
