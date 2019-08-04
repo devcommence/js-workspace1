@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>React Elements</title>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+    <!-- https://unpkg.com/react@16.8.6/umd/ -->
+    <script src="./js/react.development.js"></script>
+
+    <!-- https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+
+    <!-- https://unpkg.com/babel-standalone@6.26.0/ -->
+    <script src="./js/babel.js"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    
+    <script type="text/babel">
+    
+    const rootHandler=document.getElementById('root')
+   class UsersList extends React.Component{
+       constructor(){
+           console.log('constructor')
+           super()
+           this.state={
+               user:{}
+           }
+       }
+    
+    componentDidMount(){
+        console.log('component did mount');
+        axios.get('https://jsonplaceholder.typicode.com/users/1')
+        .then(response =>{
+            console.log('axios success function')
+            console.log(response.data)
+            const user=response.data
+            this.setState({user})
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+    }
+
+    render(){
+        console.log(this.state)
+        return(
+            <div>
+                <h2>List of users-{this.state.user.length}</h2>
+               
+                    <h1>{this.state.user.name}</h1>
+                    <h1>{this.state.user.email}</h1>
+               
+           </div>
+        )  
+    }
+   }
+    ReactDOM.render(<UsersList/>,rootHandler)
+    </script>
+</body>
+
+</html>

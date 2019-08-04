@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>React Elements</title>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+    <!-- https://unpkg.com/react@16.8.6/umd/ -->
+    <script src="./js/react.development.js"></script>
+
+    <!-- https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+
+    <!-- https://unpkg.com/babel-standalone@6.26.0/ -->
+    <script src="./js/babel.js"></script>
+
+    <script type="text/babel">
+    const rootHandler=document.getElementById('root')
+   class Component1 extends React.Component{
+       constructor(){
+           console.log('constructor')
+           super()
+           this.state={
+               count:0
+           }
+       }
+    //    deprecated method
+    //    componentWillMount(){
+    //        console.log('component will mount')
+    //    }
+
+    //important
+    //it is called only after the first render of the component
+    componentDidMount(){
+        console.log('component did mount');
+        
+    }
+    handleClick=()=>{
+        console.log('event handler')
+        //state updates trigger render, after render , component did mount will not be called
+        this.setState(prevState=>{
+            return{
+                count:prevState.count+1
+            }
+        })
+    }
+
+    render(){
+        console.log('render')
+        return(
+            <div>
+                <h2>Class Component</h2>
+                <button onClick={this.handleClick}>Click</button>
+           </div>
+        )  
+    }
+   }
+    ReactDOM.render(<Component1/>,rootHandler)
+    </script>
+</body>
+
+</html>
