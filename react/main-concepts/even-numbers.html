@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+    <!-- https://unpkg.com/react@16.8.6/umd/ -->
+    <script src="./js/react.development.js"></script>
+
+    <!-- https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+
+    <!-- https://unpkg.com/babel-standalone@6.26.0/ -->
+    <script src="./js/babel.js"></script>
+
+    <script type="text/babel">
+    const rootHandler=document.getElementById('root')
+    
+    class Evens extends React.Component{
+        constructor(){
+            console.log('constructor');
+            super()
+         this.state={
+            numbers:[10,15,20,25,30]
+         }  
+      
+    }
+    showEvens=()=>{
+        console.log(this.state.numbers)
+        const values= this.state.numbers
+        const evenValues = values.filter((value)=>{
+           return value % 2 == 0
+        })
+       this.setState({numbers:evenValues})
+    }
+    
+        render(){
+            return(
+                <div>
+                    <h2>Listing values{this.state.numbers.length}</h2>
+                    <ul>
+                        {this.state.numbers.map(number =>{
+                            return <li key={number}>{number}
+                            </li>
+                        })}
+                    </ul>
+                    <button onClick={this.showEvens}>show evens</button>
+                </div>
+            )
+        }
+    } 
+            ReactDOM.render(<Evens/>,rootHandler)
+    </script>
+</body>
+
+</html>

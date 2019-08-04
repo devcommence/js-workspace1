@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+    <!-- https://unpkg.com/react@16.8.6/umd/ -->
+    <script src="./js/react.development.js"></script>
+
+    <!-- https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+
+    <!-- https://unpkg.com/babel-standalone@6.26.0/ -->
+    <script src="./js/babel.js"></script>
+
+    <script type="text/babel">
+    const rootHandler=document.getElementById('root')
+    
+    class FormActivity extends React.Component{
+        constructor(){
+            super()
+             this.state={
+               text:'',
+            //    character:0,
+            //    words:0
+           }
+           this.wordCount=this.wordCount.bind(this)
+        }
+        wordCount(e){
+            const text=e.target.value
+            // const character=text.length
+            // const words=text.split(' ').length
+            this.setState({text})
+        }
+        render(){
+            return(
+                <div>
+                    <h1>Words and char</h1>
+                    <form>
+                        <label>
+                            Text
+                            <textarea value={this.state.text} onChange={this.wordCount}></textarea>
+                        </label>
+                       
+                    </form> 
+                    <p>total characters are:{this.state.text.length} </p>
+                    <p>total words are:{this.state.text.split(' ').length} </p>
+                </div>
+            )
+        }
+    } 
+            ReactDOM.render(<FormActivity/>,rootHandler)
+    </script>
+</body>
+
+</html>
