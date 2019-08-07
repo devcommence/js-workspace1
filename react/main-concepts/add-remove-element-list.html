@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+    <!-- https://unpkg.com/react@16.8.6/umd/ -->
+    <script src="./js/react.development.js"></script>
+
+    <!-- https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+
+    <!-- https://unpkg.com/babel-standalone@6.26.0/ -->
+    <script src="./js/babel.js"></script>
+
+    <script type="text/babel">
+    const rootHandler=document.getElementById('root')
+    
+    class Customers extends React.Component{
+        constructor(){
+            console.log('constructor');
+            super()
+        this.state={
+            customers:[
+                {id:1,name:'sam'},
+                {id:2,name:'john'},
+                {id:3,name:'rachel'},
+                {id:4,name:'monica'},
+            ],
+            text:''
+        }
+        this.handleTextChange=this.handleTextChange.bind(this)  
+        this.handleSubmit=this.handleSubmit.bind(this)  
+        this.addList=this.addList.bind(this)
+    }
+
+    handleRemove(id){
+        console.log(`handle remove`)
+    }
+
+   handleTextChange(e){
+       const text=e.target.value
+       console.log(text)
+       this.setState({text})
+   }
+   handleSubmit(e){
+    e.preventDefault()
+    const name=this.state.text
+    const customerName=this.state.customers
+    const customerArr= customerName.filter((customer)=>{
+        return !(name.includes(customer.name))
+    })
+    if(customerArr.length!=customerName.length){
+        this.setState({customers:customerArr})
+    }
+    else{
+        window.confirm('Enter correct name from the list')
+    }
+   }
+
+   addList(e){
+    e.preventDefault()
+    const name=this.state.text
+    const customerName=this.state.customers
+   
+    const customerArr= customerName.some((customer)=>{
+        return (name.includes(customer.name))
+    })
+    if(customerArr){
+        console.log('hi......')
+        window.confirm('Enter new name ')
+    }
+    else{
+       const count=this.state.customers.length+1
+        customerName.push({id:count,name:name})
+        this.setState({customers:customerName})
+    }
+   }
+
+        render(){
+            console.log(this.state)
+            return(
+                <div>
+                    <h2>Listing customers{this.state.customers.length}</h2>
+                    <ul>
+                        {this.state.customers.map(customer =>{
+                            return <li key={customer.id}>{customer.name}
+                            </li>
+                        })}
+                    </ul>
+                    <textarea value={this.state.text} onChange={this.handleTextChange}></textarea>
+                    <form onSubmit={this.handleSubmit}>
+                        <br/>
+                        <input type="submit" value="remove" />
+                    </form>
+                    <form onSubmit={this.addList}>
+                        <br/>
+                        <input type="submit" value="add" />
+                    </form>
+                    
+                </div>
+            )
+        }
+    } 
+            ReactDOM.render(<Customers/>,rootHandler)
+    </script>
+</body>
+
+</html>
+
+
+<!-- const customerArr= customerName.forEach((customer)=>{
+    if (name.includes(customer.name)){
+        console.log('hiiiii')
+        window.confirm('Already present')
+    }
+    else{
+        console.log('heloo.....')
+      customerName.push({id:5,name:name})
+    this.setState({customers:customerName})
+    }
+}) -->
