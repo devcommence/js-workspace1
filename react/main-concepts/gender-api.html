@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Document</title>
+</head>
+
+<body>
+	<div id="root">
+	</div>
+	<!-- https://unpkg.com/react@16.8.6/umd/ -->
+	<script src="./js/react.development.js"></script>
+
+	<!-- https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js -->
+	<script src="./js/react-dom.development.js"></script>
+
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+	<!-- https://unpkg.com/babel-standalone@6.26.0/ -->
+	<script src="./js/babel.js"></script>
+
+	<script type="text/babel">
+    const rootHandler=document.getElementById('root')
+    class GenderApi extends React.Component{
+			constructor(){
+				super()
+				this.state={
+				name:'',
+				email:'',
+				gender:'select gender',
+
+			}
+			this.handleNameChange=this.handleNameChange.bind(this)
+			this.handleEmailChange=this.handleEmailChange.bind(this)
+			this.handleBlur=this.handleBlur.bind(this)
+		}
+			handleNameChange(e){
+				e.preventDefault()
+				const name=e.target.value
+				this.setState({name})
+			}
+
+			handleEmailChange(e){
+				e.preventDefault()
+				const email=e.target.value
+				this.setState({email})
+			}
+
+			handleBlur(){
+				const nameValue=this.state.name
+				const apiValue=`https://gender-api.com/get?name=${nameValue}&key=pRPLCejozFwCHFbVCR`
+				axios.get(apiValue)
+        .then(response =>{
+						console.log(`The gender is ${response.data.gender}`)
+						this.setState({gender:response.data.gender})
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+			}
+			render(){
+				return(
+					<div>
+					<form>
+						<label> Name
+							<input type="text" value={this.state.name} onChange={this.handleNameChange} onBlur={this.handleBlur}>
+							</input>
+						</label>
+						<br/>
+						<label> Email
+							<input type="email" value={this.state.email} onChange={this.handleEmailChange}>
+							</input>
+					 </label>
+					 <br/>
+						<input type="radio" checked={this.state.gender === 'male'} onChange={this.handleBlur}/> Male
+            <input type="radio" checked={this.state.gender === 'female'} onChange={this.handleBlur}/> Female
+					 </form>
+				</div>
+				)	
+			}
+		}
+		ReactDOM.render(<GenderApi/>,rootHandler)
+    </script>
+</body>
+
+</html>

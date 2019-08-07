@@ -71,7 +71,6 @@
         return (name.includes(customer.name))
     })
     if(customerArr){
-        console.log('hi......')
         window.confirm('Enter new name ')
     }
     else{
@@ -109,18 +108,4 @@
             ReactDOM.render(<Customers/>,rootHandler)
     </script>
 </body>
-
 </html>
-
-
-<!-- const customerArr= customerName.forEach((customer)=>{
-    if (name.includes(customer.name)){
-        console.log('hiiiii')
-        window.confirm('Already present')
-    }
-    else{
-        console.log('heloo.....')
-      customerName.push({id:5,name:name})
-    this.setState({customers:customerName})
-    }
-}) -->

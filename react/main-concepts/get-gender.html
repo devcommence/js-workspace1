@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Document</title>
+</head>
+
+<body>
+	<div id="root">
+	</div>
+	<!-- https://unpkg.com/react@16.8.6/umd/ -->
+	<script src="./js/react.development.js"></script>
+
+	<!-- https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js -->
+	<script src="./js/react-dom.development.js"></script>
+
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+	<!-- https://unpkg.com/babel-standalone@6.26.0/ -->
+	<script src="./js/babel.js"></script>
+
+	<script type="text/babel">
+    const rootHandler=document.getElementById('root')
+		class GetGender extends React.Component{
+			constructor(){
+				super()
+				this.state={
+					name:'',
+					gender:'',
+				}
+				this.changeHandler=this.changeHandler.bind(this)
+				this.genderData=this.genderData.bind(this)
+			}
+
+    changeHandler(e){
+			e.preventDefault()
+			const name=e.target.value
+			this.setState({name})
+     }
+
+		 genderData(){
+			 const nameValue=this.state.name
+		   const apiValue=`https://gender-api.com/get?name=${nameValue}&key=pRPLCejozFwCHFbVCR`
+			 axios.get(apiValue)
+			 .then(response=>{
+				 this.setState({gender:response.data.gender})
+			 })
+			 .catch(err=> console.log(err))
+		 }
+
+			render(){
+				return(
+					<div>
+					<label>Enter Name</label>
+					<input type= "text" value={this.state.name} onChange={this.changeHandler} onBlur={this.genderData} />
+					{this.state.gender?(
+                <div>
+                 {this.state.gender}
+                </div>
+            ):(
+                <div>
+                   
+                </div>
+            )
+            }
+           </div>
+				)
+			}
+		}
+		ReactDOM.render(<GetGender/>,rootHandler)
+    </script>
+</body>
+</html>
