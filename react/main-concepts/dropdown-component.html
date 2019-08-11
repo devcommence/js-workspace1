@@ -33,7 +33,6 @@
         }
         componentDidMount(){
             const apiUri=`https://jsonplaceholder.typicode.com/users`
-            console.log('component did mount')
             axios.get(apiUri)
             .then((response)=>{
                 console.log(response.data)
@@ -51,7 +50,6 @@
         }
 
         render(){
-            console.log(this.state)
             return(
                 <div>
                     <label>

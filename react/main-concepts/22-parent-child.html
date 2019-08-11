@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+    <!-- https://unpkg.com/react@16.8.6/umd/ -->
+    <script src="./js/react.development.js"></script>
+
+    <!-- https://unpkg.com/react-dom@16.8.6/umd/react-dom.development.js -->
+    <script src="./js/react-dom.development.js"></script>
+
+    <!-- https://unpkg.com/babel-standalone@6.26.0/ -->
+    <script src="./js/babel.js"></script>
+
+    <script type="text/babel">
+    const rootHandler=document.getElementById('root')
+
+    function App(props) {
+        return(
+            <div>
+                <h2>App Component</h2>
+                <Parent title="Parent Component"/>
+                <Component1 msg="component 1"/>
+                <Component2 msg="component 2"/>
+                <Component3 data="component 3"/>
+            </div>
+        )
+    }
+    function Parent(props){
+        return(
+            <div>
+                <h2>{props.title}</h2>
+                <Child name="karan"/>
+                <Child name="arjun"/>
+            </div>
+        )
+    }
+    function Child(props){
+        return(
+            <div>
+                <h2>{props.name}</h2>
+            </div>
+        )
+    }
+    function Component3(props) {
+        return(
+            <div>
+                <h2>{props.data}</h2>
+            </div>
+        )
+    }
+
+
+    class Component2 extends React.Component{
+        render(){
+            return(
+                <div>
+                <h2>component 2 -{this.props.msg}</h2>
+            </div>
+            )
+        }
+    }
+    // create component 1-- class Component
+     class Component1 extends React.Component{
+      render(){
+          return(
+            <div>
+            <h3>{this.props.msg}</h3>
+            </div>
+          )
+      }
+    }
+
+    ReactDOM.render(<App/>,rootHandler)
+    
+    </script>
+</body>
+
+</html>

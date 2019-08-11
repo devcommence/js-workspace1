@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title></title>
+</head>
+
+<body>
+    <div id="root">
+    </div>
+    <!-- https://unpkg.com/react@16.8.6/umd/ -->
+    <script src="./js/react.development.js"></script>
+    <!-- https://unpkg.com/react-dom@16.8.6/umd/ -->
+    <script src="./js/react-dom.development.js"></script>
+    <!-- https://unpkg.com/babel-standalone@6.26.0/babel.js -->
+    <script src="./js/babel.js"></script>
+
+    <script type="text/babel">
+        const rootHandle = document.getElementById('root')
+
+
+        // 1. create a component called as Users, and maintain state to store all users information
+        // 2. create a UserForm component, which will be a controlled component, with input fields like name & email 
+        // 3. write the event handlers 
+        // 4. when the user clicks on the submit button, create a user object and print in the console, sample user obj - { id: Number(new Date()), name, email}
+
+        class Users extends React.Component {
+           constructor() {
+               super() 
+               this.state = {
+                   users: [
+                       { id: Number(new Date()), name: 'gopi', email: 'gopi@gmail.com'}
+                   ]
+               }
+               this.handleAddUser = this.handleAddUser.bind(this)
+               this.handleRemoveUser = this.handleRemoveUser.bind(this)
+           }
+
+           handleAddUser(user) {
+            // console.log('handle Add User', user)
+                this.setState(prevState => ({
+                    // users: [].concat(prevState.users).concat(user)
+                    users: [...prevState.users, user]
+                }))
+           }
+
+           handleRemoveUser(id) {
+                this.setState(prevState => ({
+                    users: prevState.users.filter(user => user.id !== id)
+                }))
+           }
+
+            render() {
+                return (
+                    <div>
+                        <h2>Listing Users - { this.state.users.length }</h2> 
+                        <ul>
+                            { this.state.users.map(user => {
+                                return <UserItem 
+                                            key={user.id} 
+                                            id={user.id}
+                                            name={user.name}
+                                            handleRemoveUser={this.handleRemoveUser}
+                                        />
+                            })}
+                        </ul>
+                        <UserForm handleAddUser={this.handleAddUser} />
+                    </div> 
+                )
+            }
+        }
+
+        class UserForm extends React.Component { 
+            constructor(){
+                super() 
+                this.state = {
+                    name: '',
+                    email: ''
+                }
+                this.handleSubmit = this.handleSubmit.bind(this)
+                this.handleChange = this.handleChange.bind(this)
+            }
+
+            handleSubmit(e) {
+                e.preventDefault()
+                const user = {
+                    id: Number(new Date()),
+                    name: this.state.name, 
+                    email: this.state.email
+                }
+
+                this.props.handleAddUser(user)
+                this.setState({
+                    name: '', email: ''
+                })
+            }
+
+            handleChange(e) {
+                // console.log(e.target, e.target.value, e.target.name)
+                this.setState({
+                    [e.target.name]: e.target.value
+                })
+            }
+
+            render() {
+                return (
+                    <div>
+                        <h2>Add User </h2>
+                        <form onSubmit={this.handleSubmit}>
+                            <label>
+                                Name 
+                                <input type="text" value={this.state.name} onChange={this.handleChange} name="name" />
+                            </label> <br/>
+
+                            <label>
+                                Email 
+                                <input type="text" value={this.state.email} onChange={this.handleChange} name="email" />
+                            </label> <br/>
+
+                            <input type="submit" value="add" />
+                        </form>
+                    </div> 
+                )
+            }
+        }
+
+        function UserItem(props) {
+            return (
+                <li> { props.name } <button onClick={() => {
+                    props.handleRemoveUser(props.id)
+                }}> remove </button> </li>
+            )
+        }
+
+        ReactDOM.render(<Users />, rootHandle)
+    </script>
+</body>
+
+</html>
